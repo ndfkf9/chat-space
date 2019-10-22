@@ -59,6 +59,7 @@ $(function(){
     var html = buildHTML(message); 
     $('.messages').append(html);
     $('#message_content').val('');
+    $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight}, 'fast');
    })
    .fail(function(){
 
