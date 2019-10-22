@@ -42,8 +42,8 @@
     box-sizing: border-box;
     padding: 46px 40px 0;
     height: calc(100% - 100px - 90px);
-    overflow: scroll; /* ここのscrollが効かない */
-    height: 77vh; /* これを追加 */
+    overflow: scroll; 
+    height: 76.9vh;
     .message {
       .upper-message {
         display: flex;
