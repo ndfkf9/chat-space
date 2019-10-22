@@ -61,7 +61,7 @@ $(function(){
     $('#message_content').val('');
    })
    .fail(function(){
-    
+
    })
   })
 });
