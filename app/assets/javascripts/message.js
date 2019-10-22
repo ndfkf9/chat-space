@@ -57,9 +57,11 @@ $(function(){
    })
    .done(function(message){
     var html = buildHTML(message); 
+    $('.messages').append(html);
+    $('#message_content').val('');
    })
    .fail(function(){
-
+    
    })
   })
 });
