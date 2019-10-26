@@ -80,7 +80,6 @@ $(function() {
       </div>
     </div>`;
     $(".js-add-user").append(html);
-    console.log(html)
   }
   function addMember(userId) {
     let html = `<input value="${userId}" name="group[user_ids][]" type="hidden" id="group_user_ids_${userId}" />`;
@@ -126,6 +125,3 @@ $(function() {
       .remove();
   });
 });
-
-
-
