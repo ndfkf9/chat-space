@@ -2,7 +2,7 @@ $(function(){
 
 
   function buildHTML(message){
-    image = ( message.image ) ? `<img src=${message.image} >` : "";
+    image = ( message.image.url ) ? `<img src=${message.image.url} >` : "";
           var html =
            `<div class="message" data-message-id=${message.id}>
               <div class="upper-message">
@@ -10,7 +10,7 @@ $(function(){
                   ${message.user_name}
                 </div>
                 <div class="upper-message__date">
-                  ${message.date}
+                  ${message.created_at}
                 </div>
               </div>
               <div class="lower-message">
@@ -46,7 +46,7 @@ $(function(){
     alert('error');
    })
    return false;
-  })
+
 });
 
 
@@ -124,4 +124,43 @@ $(function() {
       .parent()
       .remove();
   });
+});
+
+
+
+
+
+
+var reloadMessages = function() {
+  if (window.location.href.match(/\/groups\/\d+\/messages/)){   //今いるページのリンクが/groups/グループID/messagesのパスとマッチすれば以下を実行
+  var url = 'api/messages#index'      
+  //カスタムデータ属性を利用し、ブラウザに表示されている最新メッセージのidを取得
+  var last_message_id =  $('.message:last').data('message-id');
+  $.ajax({
+    //ルーティングで設定した通りのURLを指定
+    url: url,
+    //ルーティングで設定した通りhttpメソッドをgetに指定
+    type: 'get',
+    dataType: 'json',
+    //dataオプションでリクエストに値を含める
+    data: {id: last_message_id}
+  })
+  .done(function(messages) {       // フォームに入力されたデータを引数として取得
+    //追加するHTMLの入れ物を作る
+    var insertHTML = '';
+    //配列messagesの中身一つ一つを取り出し、HTMLに変換したものを入れ物に足し合わせる
+    messages.forEach(function(message){
+      insertHTML = buildHTML(message);
+    //メッセージが入ったHTMLを取得
+    $('.messages').append(insertHTML);
+    //メッセージを追加
+    $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight}, 'fast');
+  })
+  })
+  .fail(function() {
+    alert('error');
+  });
+}
+};
+  setInterval(reloadMessages, 5000);
 });
