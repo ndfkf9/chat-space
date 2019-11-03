@@ -158,7 +158,7 @@ var reloadMessages = function() {
   })
   })
   .fail(function() {
-    console.log('error');
+    alert('error');
   });
 }
 };
