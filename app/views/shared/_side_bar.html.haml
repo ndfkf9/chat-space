@@ -3,7 +3,7 @@
     %h3.header__name
       = current_user.name
     %ul.header__lists
-      %li.list
+      %li.list{"data-turbolinks": "false"}
         = link_to new_group_path do
           = fa_icon 'pencil-square-o', class: 'icon'
       %li.list
